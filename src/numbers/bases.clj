@@ -34,14 +34,16 @@
   grouping of digits, which allows us to annotate each place as a base
   10 number, e.g.
 
-  100:12,99,1 == 129901
-  101:12,99,1 == 132412
-      80:2,45 == 205
+  100:12,99,1 == 129901 in base ten
+  101:12,99,1 == 132412 in base ten
+      80:2,45 == 205 in base ten
 
   This can't be the first time someone has done this; requires a parse
   then a mapping, but is much easier on the base-10-trained
   eyes/brain. We don't worry about initial 0's meaning anything
-  special in this notation."
+  special in this notation.
+
+  UPDATE: of course someone has done this before; see IP addresses."
 
   (insta/parser "
      Number := Base':'Digits
@@ -51,10 +53,10 @@
      "))
 
 (defn sum-of-digits
-  "Takes a number (or for generality its string representation) and a
-  char->number mapping, and returns the sum of all the digits' values
-  in that mapping."
-  [numerals s]
-  (->> (str s)
-       (map numerals)
-       (reduce +)))
+  "Takes a YourNumber->[digits] parser, a digit->num mapping, and a
+  number, and returns the sum of all the digits' values in that
+  mapping."
+  [parse values s]
+  (->> (parse s)
+       (map values)
+       (reduce +')))
