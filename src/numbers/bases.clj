@@ -57,8 +57,8 @@
      "))
 
 (defn arbitrary-base-and-digits
-  "Get the sequence of digits out of the human-friendly arbitrary base
-  notation."
+  "Get the base and sequence of digits out of the human-friendly arbitrary base
+  notation, as a pair."
   [n]
   (->> n
        (insta/parse parse-arbitrary-base)
