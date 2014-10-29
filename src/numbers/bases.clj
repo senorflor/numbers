@@ -21,11 +21,11 @@
 (def base-36i
   "Maps characters [0-9a-z] to their expected values, case
   insensitively."
-  (->> (range 10)
-       (concat (range 10 36))
-       (concat (range 10 36)) ;; repeated for upper-case letters
-       (interleave "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-       (apply hash-map)))
+  (as-> (range 10) _
+        (concat _ (range 10 36))
+        (concat _ (range 10 36)) ;; repeated for upper-case letters
+        (interleave "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" _)
+        (apply hash-map _)))
 
 (def parse-arbitrary-base
   "I started to wonder why we subscribe to the one character == one
