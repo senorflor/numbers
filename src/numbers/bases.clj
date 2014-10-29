@@ -58,7 +58,9 @@
 
 (defn arbitrary-base-and-digits
   "Get the base and sequence of digits out of the human-friendly arbitrary base
-  notation, as a pair."
+  notation, as a pair, e.g.
+
+  [42 [2 3 5 7 11 13 17 19 23 29]"
   [n]
   (->> n
        (insta/parse parse-arbitrary-base)
@@ -75,10 +77,13 @@
   "Converts an arbitrary base number into it's Clojure numeric
   value (BigInteger)"
   [n]
-  (let [[base digits] (arbitrary-base-and-digits n)]
+  (let [[base digits] (arbitrary-base-and-digits n)
+        digit-in-ith-place (fn [i digit]
+                             (* (reduce * (repeat i (arbitrary-base base)))
+                                digit))]
     (->> (reverse digits)
          (map arbitrary-base)
-         (map-indexed (fn [i n] (* (reduce * (repeat i (arbitrary-base base))) n)))
+         (map-indexed digit-in-ith-place)
          (reduce +))))
 
 (defn sum-of-digits
