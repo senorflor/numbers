@@ -105,3 +105,25 @@
 ;;; all n greater than some constant? What about extensions to
 ;;; non-pyramidal 3D and >3D hyper-pyramids? What is a hyper-pyramid?
 ;;; This is a big tangent from the book, btw.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Checks for divisibility by small primes (base-10 specific)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def sum-base-10-digits
+  (partial b/sum-of-digits str b/base-10))
+
+(defn div3?
+  [n]
+  "Not really terribly interesting since we can do this with `rem`,
+  but the idea is that the sum of all base-10 digits of any number
+  divisible by 3 is also itself divisible by 3. TODO: c.f. rem's
+  implementation."
+  (loop [n n]
+    (cond
+     (#{3 6 9} n) true
+     (< n 10) false
+     :else (recur (sum-base-10-digits n)))))
+
+
+
