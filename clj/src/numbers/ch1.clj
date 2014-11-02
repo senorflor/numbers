@@ -62,3 +62,46 @@
 ;;; Question: based on our grouped notation in bases.clj, are there
 ;;; any interesting uses for supernumerary integers, e.g. 10:11,11
 ;;; which equals 10:1,2,1 aka 121?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Closed form for some geometric integer sequences
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn triangularize
+  [n]
+  (/ (* (inc n) n) 2))
+
+(defn square
+  [n]
+  (* n n))
+
+(defn pentagonalize
+  [n]
+  (inc (* (/ 5 2)
+          (- (* n n) n))))
+
+(defn sexagonalize
+  [n]
+  (inc (* 3
+          (- (* n n) n))))
+
+(defn triagonally-pyrimadize
+  [n]
+  (/ (* n (inc n) (+ 2 n))
+     6))
+
+(defn squarely-pyramidize
+  [n]
+  (/ (* n (inc n) (inc (* 2 n)))
+     6))
+
+#_(defn pentagonally-pyramidize
+  [n]
+  (/ ))
+
+#_ (defn sexagonally-pyramidize)
+
+;;;TODO: is there a generic n-gon-alize and n-gon-ally-pyramidize for
+;;; all n greater than some constant? What about extensions to
+;;; non-pyramidal 3D and >3D hyper-pyramids? What is a hyper-pyramid?
+;;; This is a big tangent from the book, btw.
